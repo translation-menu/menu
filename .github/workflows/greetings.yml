@@ -9,7 +9,7 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-    - uses: actions/hello_world@v1
+    - uses: translation-menu/menu@v1
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         issue-message: 'This looks like an issue! Repo: ${{ secrets.GITHUB_TOKEN }}'
