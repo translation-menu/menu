@@ -90,6 +90,18 @@ export class Translation {
 	}
 }
 
+export const translate = (sl, tl) => {
+    const { value: text } = await Swal.fire({
+	      input: 'textarea',
+	      inputLabel: 'Original text',
+              inputPlaceholder: 'What do you want translated?',
+              inputAttributes: {
+		      'aria-label': 'What do you want translated?'
+	      },
+    showCancelButton: true
+    });
+};
+
 export const category = {
 	english: addArea("English")
 };
