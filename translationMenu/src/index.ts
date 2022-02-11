@@ -91,15 +91,18 @@ export class Translation {
 }
 
 export const translate = (sl, tl) => {
-    const { value: text } = await Swal.fire({
-	      input: 'textarea',
-	      inputLabel: 'Original text',
-              inputPlaceholder: 'What do you want translated?',
-              inputAttributes: {
-		      'aria-label': 'What do you want translated?'
-	      },
-    showCancelButton: true
-    });
+	const { value: text } = await Swal.fire({
+		input: 'textarea',
+		inputLabel: 'Original text',
+		inputPlaceholder: 'What do you want translated?',
+		inputAttributes: {
+			'aria-label': 'What do you want translated?'
+		},
+	showCancelButton: true
+	});
+	text = escape(text);
+	fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&hl=en-US&dt=t&dt=bd&dj=1&source=input&tk=139324.139324&q=${text}`).then(response => response.json()).then(data => translation = data);
+	Swal.fire('Translation:', translation.sentences[0].trans, info);
 };
 
 export const category = {
