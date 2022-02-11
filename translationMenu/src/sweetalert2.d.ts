@@ -1,341 +1,62 @@
 declare module "sweetalert2" {
-	/**
-	 * A namespace inside the default function, containing utility function for controlling the currently-displayed
-	 * popup.
-	 *
-	 * Example:
-	 * ```
-	 * Swal.fire('Hey user!', 'I don\'t like you.', 'warning');
-	 *
-	 * if(Swal.isVisible()) { // instant regret
-	 *   Swal.close();
-	 * }
-	 * ```
-	 */
 	namespace Swal {
-		/**
-		 * Function to display a simple SweetAlert2 popup.
-		 *
-		 * Example:
-		 * ```
-		 * Swal.fire('The Internet?', 'That thing is still around?', 'question');
-		 * ```
-		 */
 		function fire(
 			title?: string,
 			html?: string,
 			icon?: SweetAlertIcon
 		): Promise<SweetAlertResult>;
-
-		/**
-		 * Function to display a SweetAlert2 popup, with an object of options, all being optional.
-		 * See the `SweetAlertOptions` interface for the list of accepted fields and values.
-		 *
-		 * Example:
-		 * ```
-		 * Swal.fire({
-		 *   title: 'Auto close alert!',
-		 *   text: 'I will close in 2 seconds.',
-		 *   timer: 2000
-		 * })
-		 * ```
-		 */
 		function fire(options: SweetAlertOptions): Promise<SweetAlertResult>;
-
-		/**
-		 * Reuse configuration by creating a `Swal` instance.
-		 *
-		 * Example:
-		 * ```
-		 * const Toast = Swal.mixin({
-		 *   toast: true,
-		 *   position: 'top-end',
-		 *   timer: 3000,
-		 *   timerProgressBar: true
-		 * })
-		 * Toast.fire('Something interesting happened', '', 'info')
-		 * ```
-		 *
-		 * @param options the default options to set for this instance.
-		 */
 		function mixin(options?: SweetAlertOptions): typeof Swal;
-
-		/**
-		 * Determines if a popup is shown.
-		 */
 		function isVisible(): boolean;
-
-		/**
-		 * Updates popup options.
-		 * See the `SweetAlertOptions` interface for the list of accepted fields and values.
-		 *
-		 * Example:
-		 * ```
-		 * Swal.update({
-		 *   icon: 'error'
-		 * })
-		 * ```
-		 */
 		function update(options: SweetAlertOptions): void;
-
-		/**
-		 * Closes the currently open SweetAlert2 popup programmatically.
-		 *
-		 * @param result The promise originally returned by `Swal.fire()` will be resolved with this value.
-		 *               If no object is given, the promise is resolved with an empty `SweetAlertResult` object.
-		 */
 		function close(result?: SweetAlertResult): void;
-
-		/**
-		 * Gets the popup.
-		 */
 		function getPopup(): HTMLElement;
-
-		/**
-		 * Gets the popup title.
-		 */
 		function getTitle(): HTMLElement;
-
-		/**
-		 * Gets the popup header.
-		 */
 		function getHeader(): HTMLElement;
-
-		/**
-		 * Gets progress steps.
-		 */
 		function getProgressSteps(): HTMLElement;
-
-		/**
-		 * Gets the popup content.
-		 */
 		function getContent(): HTMLElement;
-
-		/**
-		 * Gets the DOM element where the `html`/`text` parameter is rendered to.
-		 */
 		function getHtmlContainer(): HTMLElement;
-
-		/**
-		 * Gets the image.
-		 */
 		function getImage(): HTMLElement;
-
-		/**
-		 * Gets the close button.
-		 */
 		function getCloseButton(): HTMLElement;
-
-		/**
-		 * Gets the current visible icon.
-		 */
 		function getIcon(): HTMLElement | null;
-
-		/**
-		 * Gets all icons. The current visible icon will have `style="display: flex"`,
-		 * all other will be hidden by `style="display: none"`.
-		 */
 		function getIcons(): HTMLElement[];
-
-		/**
-		 * Gets the "Confirm" button.
-		 */
 		function getConfirmButton(): HTMLElement;
-
-		/**
-		 * Gets the "Cancel" button.
-		 */
 		function getCancelButton(): HTMLElement;
-
-		/**
-		 * Gets actions (buttons) wrapper.
-		 */
 		function getActions(): HTMLElement;
-
-		/**
-		 * Gets the popup footer.
-		 */
 		function getFooter(): HTMLElement;
-
-		/**
-		 * Gets the timer progress bar (see the `timerProgressBar` param).
-		 */
 		function getTimerProgressBar(): HTMLElement;
-
-		/**
-		 * Gets all focusable elements in the popup.
-		 */
 		function getFocusableElements(): HTMLElement[];
-
-		/**
-		 * Enables "Confirm" and "Cancel" buttons.
-		 */
 		function enableButtons(): void;
-
-		/**
-		 * Disables "Confirm" and "Cancel" buttons.
-		 */
 		function disableButtons(): void;
-
-		/**
-		 * Disables buttons and show loader. This is useful with AJAX requests.
-		 */
 		function showLoading(): void;
-
-		/**
-		 * Enables buttons and hide loader.
-		 */
 		function hideLoading(): void;
-
-		/**
-		 * Determines if popup is in the loading state.
-		 */
 		function isLoading(): boolean;
-
-		/**
-		 * Clicks the "Confirm" button programmatically.
-		 */
 		function clickConfirm(): void;
-
-		/**
-		 * Clicks the "Cancel" button programmatically.
-		 */
 		function clickCancel(): void;
-
-		/**
-		 * Shows a validation message.
-		 *
-		 * @param validationMessage The validation message.
-		 */
 		function showValidationMessage(validationMessage: string): void;
-
-		/**
-		 * Hides validation message.
-		 */
 		function resetValidationMessage(): void;
-
-		/**
-		 * Gets the input DOM node, this method works with input parameter.
-		 */
 		function getInput(): HTMLInputElement;
-
-		/**
-		 * Disables the popup input. A disabled input element is unusable and un-clickable.
-		 */
 		function disableInput(): void;
-
-		/**
-		 * Enables the popup input.
-		 */
 		function enableInput(): void;
-
-		/**
-		 * Gets the validation message container.
-		 */
 		function getValidationMessage(): HTMLElement;
-
-		/**
-		 * If `timer` parameter is set, returns number of milliseconds of timer remained.
-		 * Otherwise, returns undefined.
-		 */
 		function getTimerLeft(): number | undefined;
-
-		/**
-		 * Stop timer. Returns number of milliseconds of timer remained.
-		 * If `timer` parameter isn't set, returns `undefined`.
-		 */
 		function stopTimer(): number | undefined;
-
-		/**
-		 * Resume timer. Returns number of milliseconds of timer remained.
-		 * If `timer` parameter isn't set, returns `undefined`.
-		 */
 		function resumeTimer(): number | undefined;
-
-		/**
-		 * Toggle timer. Returns number of milliseconds of timer remained.
-		 * If `timer` parameter isn't set, returns `undefined`.
-		 */
 		function toggleTimer(): number | undefined;
-
-		/**
-		 * Check if timer is running. Returns true if timer is running,
-		 * and false is timer is paused / stopped.
-		 * If `timer` parameter isn't set, returns `undefined`.
-		 */
 		function isTimerRunning(): boolean | undefined;
-
-		/**
-		 * Increase timer. Returns number of milliseconds of an updated timer.
-		 * If `timer` parameter isn't set, returns `undefined`.
-		 *
-		 * @param n The number of milliseconds to add to the currect timer
-		 */
 		function increaseTimer(n: number): number | undefined;
-
-		/**
-		 * Provide an array of SweetAlert2 parameters to show multiple popups, one popup after another.
-		 *
-		 * @param steps The steps' configuration.
-		 */
 		function queue(steps: Array<SweetAlertOptions | string>): Promise<any>;
-
-		/**
-		 * Gets the index of current popup in queue. When there's no active queue, `null` will be returned.
-		 */
 		function getQueueStep(): string | null;
-
-		/**
-		 * Inserts a popup in the queue.
-		 *
-		 * @param step  The step configuration (same object as in the `Swal.fire()` call).
-		 * @param index The index to insert the step at.
-		 *              By default a popup will be added to the end of a queue.
-		 */
 		function insertQueueStep(
 			step: SweetAlertOptions,
 			index?: number
 		): number;
-
-		/**
-		 * Deletes the popup at the specified index in the queue.
-		 *
-		 * @param index The popup index in the queue.
-		 */
 		function deleteQueueStep(index: number): void;
-
-		/**
-		 * Determines if a given parameter name is valid.
-		 *
-		 * @param paramName The parameter to check
-		 */
 		function isValidParameter(paramName: string): boolean;
-
-		/**
-		 * Determines if a given parameter name is valid for `Swal.update()` method.
-		 *
-		 * @param paramName The parameter to check
-		 */
 		function isUpdatableParameter(paramName: string): boolean;
-
-		/**
-		 * Normalizes the arguments you can give to Swal.fire() in an object of type SweetAlertOptions.
-		 *
-		 * Example:
-		 * ```
-		 * Swal.argsToParams(['title', 'text']); //=> { title: 'title', text: 'text' }
-		 * Swal.argsToParams({ title: 'title', text: 'text' }); //=> { title: 'title', text: 'text' }
-		 * ```
-		 *
-		 * @param params The array of arguments to normalize.
-		 */
 		function argsToParams(
 			params: SweetAlertArrayOptions | [SweetAlertOptions]
 		): SweetAlertOptions;
-
-		/**
-		 * An enum of possible reasons that can explain an alert dismissal.
-		 */
 		enum DismissReason {
 			cancel,
 			backdrop,
@@ -343,10 +64,7 @@ declare module "sweetalert2" {
 			esc,
 			timer,
 		}
-
-		/**
-		 * SweetAlert2's version
-		 */
+		
 		const version: string;
 	}
 
@@ -430,75 +148,13 @@ declare module "sweetalert2" {
 	export type SweetAlertArrayOptions = [string?, string?, SweetAlertIcon?];
 
 	export interface SweetAlertOptions {
-		/**
-		 * The title of the popup, as HTML.
-		 * It can either be added to the object under the key `title` or passed as the first parameter of `Swal.fire()`.
-		 *
-		 * @default ''
-		 */
 		title?: string | HTMLElement | JQuery;
-
-		/**
-		 * The title of the popup, as text. Useful to avoid HTML injection.
-		 *
-		 * @default ''
-		 */
 		titleText?: string;
-
-		/**
-		 * A description for the popup.
-		 * If `text` and `html` parameters are provided in the same time, `text` will be used.
-		 *
-		 * @default ''
-		 */
 		text?: string;
-
-		/**
-		 * A HTML description for the popup.
-		 * It can either be added to the object under the key `html` or passed as the second parameter of `Swal.fire()`.
-		 *
-		 * @default ''
-		 */
 		html?: string | HTMLElement | JQuery;
-
-		/**
-		 * The icon of the popup.
-		 * SweetAlert2 comes with 5 built-in icons which will show a corresponding icon animation:
-		 * `'warning'`, `'error'`, `'success'`, `'info'` and `'question'`.
-		 * It can either be put to the object under the key `icon` or passed as the third parameter of `Swal.fire()`.
-		 *
-		 * @default undefined
-		 */
 		icon?: SweetAlertIcon;
-
-		/**
-		 * The custom HTML content for an icon.
-		 *
-		 * Example:
-		 * ```
-		 * Swal.fire({
-		 *   icon: 'error',
-		 *   iconHtml: '<i class="fas fa-bug"></i>'
-		 * })
-		 * ```
-		 *
-		 * @default undefined
-		 */
 		iconHtml?: string;
-
-		/**
-		 * The footer of the popup, as HTML.
-		 *
-		 * @default ''
-		 */
 		footer?: string | HTMLElement | JQuery;
-
-		/**
-		 * Whether or not SweetAlert2 should show a full screen click-to-dismiss backdrop.
-		 * Either a boolean value or a css background value (hex, rgb, rgba, url, etc.)
-		 *
-		 * @default true
-		 */
 		backdrop?: boolean | string;
 
 		/**
