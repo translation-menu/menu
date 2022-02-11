@@ -2,6 +2,7 @@ import { io } from "socket.io-client";
 import "./style.scss";
 import Swal from 'sweetalert2';
 export const menu = document.createElement("div");
+export const wrapper = document.getElementById("game-wrapper");
 
 document.getElementById("translation-menu")?.remove();
 document.getElementById("menu-toggler")?.remove();
@@ -10,9 +11,6 @@ wrapper?.prepend(menu);
 
 export const toggler = document.createElement("button");
 toggler.id = "menu-toggler";
-toggler.style.fontSize = "35px";
-toggler.style.height = "35px";
-toggler.style.width = "70px";
 
 let visible = false;
 wrapper?.prepend(toggler);
