@@ -1,4 +1,3 @@
-import { io } from "socket.io-client";
 import "./style.scss";
 import Swal from 'sweetalert2';
 export const menu = document.createElement("div");
@@ -90,46 +89,38 @@ export class Translation {
 	}
 }
 
-export const translate = (sl, tl) => {
-	const { value: text } = await Swal.fire({
+export const translate = async (sl: string, tl: string) => {
+	var text = await Swal.mixin({
 		input: 'textarea',
-		inputLabel: 'Original text',
 		inputPlaceholder: 'What do you want translated?',
 		inputAttributes: {
 			'aria-label': 'What do you want translated?'
 		},
 	showCancelButton: true
 	});
-	text = escape(text);
-	fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&hl=en-US&dt=t&dt=bd&dj=1&source=input&tk=139324.139324&q=${text}`).then(response => response.json()).then(data => translation = data);
-	Swal.fire('Translation:', translation.sentences[0].trans, info);
+    async function loadTranslation() {
+        var response = await
+        fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&hl=en-US&dt=t&dt=bd&dj=1&source=input&tk=139324.139324&q=${text}');
+        var translation = await response.json();
+        Swal.fire('Translation:', translation.sentences[0].trans, 'info');
+    }
+    loadTranslation();
 };
 
 export const category = {
 	english: addArea("English")
 };
 
+/*
 document.onkeyup = function(e) {
   if (e.altKey && e.which == 84) {
     if (document.getElementById("translation-menu").style.display == "block" && document.getElementById("menu-toggler").style.display == "block") {
-      document.getElementById("translation-menu").style.display = "none";
-			document.getElementById("menu-toggler").style.display = "none";
+        document.getElementById("translation-menu").style.display = "none";
+		document.getElementById("menu-toggler").style.display = "none";
     } else {
-			document.getElementById("translation-menu").style.display = "block";
-			document.getElementById("menu-toggler").style.display = "block";
+		document.getElementById("translation-menu").style.display = "block";
+		document.getElementById("menu-toggler").style.display = "block";
     }
   }
 };
-
-if (process.env.NODE_ENV === "development") {
-	const socket = io("http://localhost:3001");
-	let used = false;
-	socket.on("update", data => {
-		if (used) return;
-		used = true;
-		socket.disconnect();
-		document.getElementById("translation-menu")?.remove();
-		document.getElementById("menu-toggler")?.remove();
-		eval(data);
-	});
-}
+*/
