@@ -82,6 +82,14 @@ export class Translation {
 		return this;
 	}
 
+    setClick (event: () => unknown) {
+		this.element.onclick = async () => {
+			await event();
+			console.log(`Triggered ${this.name}.`);
+		};
+		return this;
+	}
+
 	setDesc (desc: string) {
 		this.element.title = desc;
 		this.description = desc;
