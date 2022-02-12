@@ -1,7 +1,7 @@
 import "./style.scss";
 import Swal from 'sweetalert2';
 export const menu = document.createElement("div");
-export const wrapper = document.getElementById("game-wrapper");
+export const wrapper = document.getElementByTagName("body");
 
 document.getElementById("translation-menu")?.remove();
 document.getElementById("menu-toggler")?.remove();
