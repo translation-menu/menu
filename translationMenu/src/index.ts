@@ -108,7 +108,7 @@ export const translate = async (sl: string, tl: string) => {
 	});
     async function loadTranslation() {
         var response = await
-        fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&hl=en-US&dt=t&dt=bd&dj=1&source=input&tk=139324.139324&q=${text}');
+        fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&hl=en-US&dt=t&dt=bd&dj=1&source=input&tk=139324.139324&q=${text}`);
         var translation = await response.json();
         Swal.fire('Translation:', translation.sentences[0].trans, 'info');
     }
